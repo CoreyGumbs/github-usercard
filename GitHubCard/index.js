@@ -32,6 +32,7 @@ axios.get('https://api.github.com/users/CoreyGumbs')
 .then(res => {
   const data = JSON.stringify(res);
   followersArray.push(data.data);
+  console.log(res.data);
 });
 
 
@@ -82,6 +83,16 @@ const githubCard = (response) => {
   card.append(cardImg, cardInfo);
   cardInfo.append(cardTitle, cardUserName, cardLocation, cardProfile, cardFollowers, cardFollowing, cardBio);
   cardProfile.appendChild(cardProfileLink);
+
+  //context
+  cardImg.src = response.avatar_url;
+  cardTitle.textContent = response.name;
+  cardUserName.textContent = response.login;
+  cardLocation = response.location;
+  cardProfileLink =  response.html_url;
+  cardFollowers = response.followers;
+  cardFollowing = response.following;
+  cardBio = response.bio;
 
   return card;
 }
