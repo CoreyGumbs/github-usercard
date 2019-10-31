@@ -25,13 +25,13 @@
 */
 
 const followersArray = [];
+const cardSection = document.querySelector('cards');
 
 
 axios.get('https://api.github.com/users/CoreyGumbs')
 .then(res => {
   const data = JSON.stringify(res);
-  followersArray.push(data);
-  console.log(data);
+  followersArray.push(data.data);
 });
 
 
@@ -54,7 +54,10 @@ axios.get('https://api.github.com/users/CoreyGumbs')
 </div>
 
 */
-const githubCard = (data) => {
+console.log(followersArray[0]);
+
+
+const githubCard = (response) => {
 
   //create Elements
   const card = document.createElement('div');
