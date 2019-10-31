@@ -34,7 +34,6 @@ axios.get('https://api.github.com/users/CoreyGumbs')
   console.log(data);
 });
 
-console.log(followersArray[0]);
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -57,22 +56,31 @@ console.log(followersArray[0]);
 */
 const githubCard = (data) => {
 
-   //create Elements
-   const card = document.createElement('div');
-   const cardImg = document.createElement('img');
-   const cardInfo = document.createElement('div');
-   const cardH3 = document.createElement('h3');
-   const cardUserName = document.createElement('p');
-   const cardLocation = document.createElement('p');
-   const cardProfile = document.createElement('p');
-   const cardProfileLink = document.createElement('a');
-   const cardFollowers = document.createElement('p');
-   const cardFollowing = document.createElement('p');
-   const cardBio = document.createElement('p');
+  //create Elements
+  const card = document.createElement('div');
+  const cardImg = document.createElement('img');
+  const cardInfo = document.createElement('div');
+  const cardTitle = document.createElement('h3');
+  const cardUserName = document.createElement('p');
+  const cardLocation = document.createElement('p');
+  const cardProfile = document.createElement('p');
+  const cardProfileLink = document.createElement('a');
+  const cardFollowers = document.createElement('p');
+  const cardFollowing = document.createElement('p');
+  const cardBio = document.createElement('p');
 
-   //add Attributes
+  //add Attributes
+  card.classList.add('card');
+  cardInfo.classList.add('card-info');
+  cardTitle.classList.add('name');
+  cardUserName.classList.add('username');
 
-   //create Appending
+  //create Appending
+  card.append(cardImg, cardInfo);
+  cardInfo.append(cardTitle, cardUserName, cardLocation, cardProfile, cardFollowers, cardFollowing, cardBio);
+  cardProfile.appendChild(cardProfileLink);
+
+  return card;
 }
 /* List of LS Instructors Github username's: 
   tetondan
