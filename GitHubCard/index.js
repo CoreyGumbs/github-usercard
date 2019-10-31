@@ -26,6 +26,16 @@
 
 const followersArray = [];
 
+
+axios.get('https://api.github.com/users/CoreyGumbs')
+.then(res => {
+  const data = JSON.stringify(res);
+  followersArray.push(data);
+  console.log(data);
+});
+
+console.log(followersArray[0]);
+
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
 
@@ -45,7 +55,25 @@ const followersArray = [];
 </div>
 
 */
+const githubCard = (data) => {
 
+   //create Elements
+   const card = document.createElement('div');
+   const cardImg = document.createElement('img');
+   const cardInfo = document.createElement('div');
+   const cardH3 = document.createElement('h3');
+   const cardUserName = document.createElement('p');
+   const cardLocation = document.createElement('p');
+   const cardProfile = document.createElement('p');
+   const cardProfileLink = document.createElement('a');
+   const cardFollowers = document.createElement('p');
+   const cardFollowing = document.createElement('p');
+   const cardBio = document.createElement('p');
+
+   //add Attributes
+
+   //create Appending
+}
 /* List of LS Instructors Github username's: 
   tetondan
   dustinmyers
