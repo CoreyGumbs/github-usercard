@@ -30,10 +30,10 @@ const cardSection = document.querySelector('cards');
 
 axios.get('https://api.github.com/users/CoreyGumbs')
 .then(res => {
-  const data = JSON.stringify(res);
-  followersArray.push(data.data);
-  console.log(res.data);
-});
+  console.log(res);
+  let cards =  document.querySelector('.cards');
+  cards.appendChild(githubCard(res.data));
+}).catch(err => console.log(err));
 
 
 /* Step 3: Create a function that accepts a single object as its only argument,
@@ -88,11 +88,11 @@ const githubCard = (response) => {
   cardImg.src = response.avatar_url;
   cardTitle.textContent = response.name;
   cardUserName.textContent = response.login;
-  cardLocation = response.location;
-  cardProfileLink =  response.html_url;
-  cardFollowers = response.followers;
-  cardFollowing = response.following;
-  cardBio = response.bio;
+  cardLocation.textContent = response.location;
+  cardProfileLink.textContent =  response.html_url;
+  cardFollowers.textContent = response.followers;
+  cardFollowing.textContent = response.following;
+  cardBio.textContent = response.bio;
 
   return card;
 }
