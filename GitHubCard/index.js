@@ -59,38 +59,26 @@ followersArray.forEach(user => {
   }).catch(err  => console.log(err));
 });
 
-//Stretch  dynamic
-
-// axios.get('https://api.github.com/users/CoreyGumbs/followers')
-// .then(response => {
-//   response.data.forEach(item => { 
-//     console.log(item);
-//     followersArray.push(item.login);
-//   });
-
-//   followersArray.forEach(user => {
-//     axios.get(`https://api.github.com/users/${user}`)
-//     .then(res => {
-//       cardSection.append(githubCard(res.data))
-//     })
-//   })
-
-// }).catch(err => console.log(err));
-//'https://api.github.com/users/CoreyGumbs/followers'
-
 
 ///STRETCH DYNAMIC FOLLOWERS FUNCTION
-const githubFollowers = (url) =>{
+const githubFollowers = (url) => {
+  const dynamicFollowersArray = [];
 
   axios.get(url)
   .then(response => {
-    response.data.forEach(item =>{
-      console.log(item);
-      const cards = document.querySelector('.cards');
-      cards.appendChild(githubFollowerCard(item));
+    response.data.forEach(item =>{ 
+      dynamicFollowersArray.push(item.login);
     });
-  })
- 
+  }).then( results =>{
+    dynamicFollowersArray.forEach(user =>{
+      axios.get(`https://api.github.com/users/${user}`)
+      .then(res =>{
+        const cards = document.querySelector('.cards');
+        cards.appendChild(githubCard(res.data));
+      })
+
+    })
+  }).catch(err => console.log(err));
 }
 
 githubFollowers('https://api.github.com/users/CoreyGumbs/followers');
