@@ -77,8 +77,10 @@ followersArray.forEach(user => {
 
 // }).catch(err => console.log(err));
 //'https://api.github.com/users/CoreyGumbs/followers'
+
+
+///STRETCH DYNAMIC FOLLOWERS FUNCTION
 const githubFollowers = (url) =>{
-  const dynamicFollowersArray = [];
 
   axios.get(url)
   .then(response => {
@@ -152,11 +154,10 @@ const githubCard = (user) => {
   cardFollowing.textContent = user.following;
   cardBio.textContent = user.bio;
 
-  //set link
-
   return card;
 }
 
+///Stretch Card for Followers
 const githubFollowerCard = (user) => {
   console.log(user);
   //create Elements
@@ -170,7 +171,7 @@ const githubFollowerCard = (user) => {
   const cardProfileLink = document.createElement('a');
   const cardFollowers = document.createElement('p');
   const cardFollowing = document.createElement('p');
-  const cardBio = document.createElement('p');
+  const cardRepo = document.createElement('p');
 
   //add Attributes
   card.classList.add('card');
@@ -180,7 +181,7 @@ const githubFollowerCard = (user) => {
 
   //create Appending
   card.append(cardImg, cardInfo);
-  cardInfo.append(cardTitle, cardUserName, cardLocation, cardProfile, cardFollowers, cardFollowing, cardBio);
+  cardInfo.append(cardTitle, cardUserName, cardLocation, cardProfile, cardFollowers, cardFollowing, cardRepo);
   cardProfile.appendChild(cardProfileLink);
 
   //context
@@ -192,7 +193,7 @@ const githubFollowerCard = (user) => {
   cardProfileLink.textContent = user.html_url;
   cardFollowers.textContent = user.followers;
   cardFollowing.textContent = user.following;
-  cardBio.textContent = user.repos_url;
+  cardRepo.textContent = user.repos_url;
 
   return card;
 }
