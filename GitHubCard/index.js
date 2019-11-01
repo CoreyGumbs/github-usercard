@@ -34,9 +34,7 @@
 */
 
 const followersArray = ['tetondan', 'dustinmyers','justsml','luishrd', 'bigknell'];
-const dynamicFollowersArray = [];
 const cardSection = document.querySelector('cards');
-
 
 //My Card
 axios.get('https://api.github.com/users/CoreyGumbs')
@@ -46,7 +44,6 @@ axios.get('https://api.github.com/users/CoreyGumbs')
   cards.appendChild(githubCard(res.data));
 
 }).catch(err => console.log(err));
-
 
 //followers Array
 followersArray.forEach(user => {
@@ -62,20 +59,25 @@ followersArray.forEach(user => {
 
 ///STRETCH DYNAMIC FOLLOWERS FUNCTION
 const githubFollowers = (url) => {
+
   const dynamicFollowersArray = [];
 
   axios.get(url)
   .then(response => {
+
     response.data.forEach(item =>{ 
       dynamicFollowersArray.push(item.login);
     });
-  }).then( results =>{
+
+  }).then(() => {
+
     dynamicFollowersArray.forEach(user =>{
+
       axios.get(`https://api.github.com/users/${user}`)
-      .then(res =>{
+      .then(res => {
         const cards = document.querySelector('.cards');
         cards.appendChild(githubCard(res.data));
-      })
+      });
 
     })
   }).catch(err => console.log(err));
@@ -102,8 +104,6 @@ githubFollowers('https://api.github.com/users/CoreyGumbs/followers');
 </div>
 
 */
-
-
 
 const githubCard = (user) => {
 
@@ -141,47 +141,6 @@ const githubCard = (user) => {
   cardFollowers.textContent = user.followers;
   cardFollowing.textContent = user.following;
   cardBio.textContent = user.bio;
-
-  return card;
-}
-
-///Stretch Card for Followers
-const githubFollowerCard = (user) => {
-  console.log(user);
-  //create Elements
-  const card = document.createElement('div');
-  const cardImg = document.createElement('img');
-  const cardInfo = document.createElement('div');
-  const cardTitle = document.createElement('h3');
-  const cardUserName = document.createElement('p');
-  const cardLocation = document.createElement('p');
-  const cardProfile = document.createElement('p');
-  const cardProfileLink = document.createElement('a');
-  const cardFollowers = document.createElement('p');
-  const cardFollowing = document.createElement('p');
-  const cardRepo = document.createElement('p');
-
-  //add Attributes
-  card.classList.add('card');
-  cardInfo.classList.add('card-info');
-  cardTitle.classList.add('name');
-  cardUserName.classList.add('username');
-
-  //create Appending
-  card.append(cardImg, cardInfo);
-  cardInfo.append(cardTitle, cardUserName, cardLocation, cardProfile, cardFollowers, cardFollowing, cardRepo);
-  cardProfile.appendChild(cardProfileLink);
-
-  //context
-  cardImg.src = user.avatar_url;
-  cardTitle.textContent = user.name;
-  cardUserName.textContent = user.login;
-  cardLocation.textContent = user.location;
-  cardProfileLink.setAttribute('href', `${user.html_url}`);
-  cardProfileLink.textContent = user.html_url;
-  cardFollowers.textContent = user.followers;
-  cardFollowing.textContent = user.following;
-  cardRepo.textContent = user.repos_url;
 
   return card;
 }
